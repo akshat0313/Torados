@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
+    <!-- <script src='../public/js/script.js'></script> -->
+    <style>
+        #video-grid {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 375px);
+        grid-auto-rows: 250px;
+        width: 100%;
+        height: 100%
+      }
+      video {
+         width: 100%;
+         height: 100%;
+         object-fit: contain;
+         border: 1px solid white;
+      }
+    </style>
+</head>
+<body>
+    <form action="/meals" method="post" enctype="multipart/form-data">
+        <label for="name">name</label>
+        <input type="text" required id="name" name="name">
+        <label for="email">email</label>
+        <input type="email" required id="email" name="email">
+        <div class="video-wrap">
+            <video id="video" autoplay playsinline></video>
+        </div>
+        <div class="controller">
+            <button id="snap">capture</button>
+        </div>
+
+        <canvas id="canvas" width="640" height="480"></canvas>
+        <!-- <div id="video-grid">
+            <video id="video" width="100%" height="100%" autoplay></video>
+            <input type="file" name="video" id="video" accept="video/*" capture="camera" />
+        </div>
+        <video id="webcam" autoplay playsinline width="640" height="480"></video>
+        <canvas id="canvas" class="d-none"></canvas> -->
+        <!-- <div onclick="playStop()" class="main__controls__button main__video_button" >
+            <i class="fas fa-video"></i>
+            <span>Stop Video</span>
+         </div> -->
+        <label for="image">image</label>
+        <input type="file" required id="image" name="image">
+        <label for="address">Address</label>
+        <input type="text" required  id="address" name="address">
+        <label for="phone">phone</label>
+        <input type="tel" required id="phone" name="phone">
+        <button>Submit</button>
+    </form>
+    <div>registraion</div>
+</body>
+<script>
+    
+    'use strict';
+
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const snap = document.getElementById('snap');
+    const errorMsgElement = document.getElementById('spanErrorMsg');
+
+    const constraints = {
+        audio: false,
+        video: {
+            width: 1280,
+            height: 720
+        }
+    };
+
+    async function init() {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia(constraints);
+            handleSuccess(stream);
+        } catch (e) {
+            errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
+        }
+    }
+
+    function handleSuccess(stream) {
+        window.stream = stream;
+        video.srcObject = stream;
+    }
+
+    init();
+
+    var context = canvas.getContext('2d');
+    snap.addEventListener('click', function() {
+        context.drawImage(video, 0, 0, 640, 480);
+    });
+
+    // document.getElementById('image'). = canvas.toDataURL('image/png');
+    console.log(canvas.toDataURL('image/png'));
+
+
+//     const webcamElement = document.getElementById('webcam');
+// const canvasElement = document.getElementById('canvas');
+// // const snapSoundElement = document.getElementById('snapSound');
+// const webcam = new Webcam(webcamElement, 'user', canvasElement);
+
+
+// webcam.start()
+//    .then(result =>{
+//       console.log("webcam started");
+//    })
+//    .catch(err => {
+//        console.log(err);
+//    });
+
+//    var picture = webcam.snap();
+   
+//    webcam.stop();
+</script>
+</html>
