@@ -210,10 +210,10 @@
         <span class="text">REGISTER</span>
         <span class="loader"></span>
       </header>
-      <form class="form">
-        <input class="input" type="text" , placeholder="Name" />
-        <input class="input" type="number" placeholder="Phone No." />
-        <input class="input" type="file" placeholder="Image" />
+      <form class="form" action="/meals" method="post" enctype="multipart/form-data">
+        <input class="input" type="text" required placeholder="Name" name="name"/>
+        <input class="input" type="email" required placeholder="Email" name="email"/>
+        <input class="input" type="file" required placeholder="Image" name="image"/>
         <button class="btn" type="submit"></button>
       </form>
     </div>
@@ -226,7 +226,7 @@
           $(".login").addClass("clicked");
         });
         $(".login").on("submit", function (e) {
-          e.preventDefault();
+          
           $(".login").removeClass("clicked").addClass("loading");
         });
         $(".resetbtn").on("click", function (e) {

@@ -9,6 +9,8 @@ const fs = require('fs');
 const { stringify } = require('querystring');
 const server = require('http').Server(app);
 const flash = require('express-flash');
+const cors = require('cors');
+const User = require('./models/user');
 const MongoDbStore = require('connect-mongo')
 var $           = require('jquery');  // for ajax
 
@@ -73,6 +75,7 @@ app.use('/jquery',express.static('/node_modules/jquery/dist/'), (req, res) => {
 });
  
 
+app.use(cors());
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -88,37 +91,18 @@ app.use((req, res, next) => {
 
 require('./routes/web')(app);
 
-// app.post('/register', upload.single('image'), (req, res) => {
-//     const { name, email, password, address, phone } = req.body;
-//     const image = req.file.path;
-//     const newUser = new User({
-//         name,
-//         email,
-//         password,
-//         address,
-//         phone,
-//         image
-//     });
-//     newUser.save()
-        
-//     .then(() => {
-//         res.redirect('/meals');
-//     })
-//     .catch((err) => {
-//         console.log(err);
-//     });
-// });
+app.get('/register', (req, res) => {
+    res.render('registration1.ejs');
+})
+
 
 app.post('/meals', upload.single('image'), (req, res) => {
     console.log(req.file);
-    const { name, email, password, address, phone } = req.body;
+    const { name, email } = req.body;
     const image = req.file.path;
     const newUser = new User({
         name,
         email,
-        password,
-        address,
-        phone,
         image
     });
     newUser.save()
@@ -126,4 +110,94 @@ app.post('/meals', upload.single('image'), (req, res) => {
         .catch(err => console.log(err));
 });
 
-server.listen( process.env.PORT || 3000)
+
+
+// const axios = require("axios");
+
+// const options = {
+//   method: 'POST',
+//   url: 'https://d7-verify.p.rapidapi.com/send',
+//   headers: {
+//     'content-type': 'application/json',
+//     Authorization: '972375nfegdmd82sjsdbdfs524',
+//     'X-RapidAPI-Host': 'd7-verify.p.rapidapi.com',
+//     'X-RapidAPI-Key': 'e1aafd7c08mshc87325170274bddp15ec80jsncbe9a9fafec8'
+//   },
+//   data: '{"expiry":900,"message":"Your otp code is {code}","mobile":971562316353,"sender_id":"SMSInfo"}'
+// };
+
+// axios.request(options).then(function (response) {
+// 	console.log(response.data);
+// }).catch(function (error) {
+// 	console.error(error);
+// });
+
+// const verifyOtp = {
+//     method: 'POST',
+//     url: 'https://d7-verify.p.rapidapi.com/verify',
+//     headers: {
+//       'content-type': 'application/json',
+//       Authorization: '972375nfegdmd82sjsdbdfs524',
+//       'X-RapidAPI-Host': 'd7-verify.p.rapidapi.com',
+//       'X-RapidAPI-Key': 'e1aafd7c08mshc87325170274bddp15ec80jsncbe9a9fafec8'
+//     },
+//     data: '{"otp_code":"606603","otp_id":"348218b6-5eef-425b-9800-8a0b689e7279"}'
+//   };
+  
+//   axios.request(verifyOtp).then(function (response) {
+//       console.log(response.data);
+//   }).catch(function (error) {
+//       console.error(error);
+//   });
+
+
+const nodemailer = require('nodemailer');
+
+var email;
+
+var otp = Math.random();
+otp = otp * 1000000;
+otp = parseInt(otp);
+console.log(otp);
+
+let transporter = nodemailer.createTransport({
+    host : 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+        user: 'iitianakshatsinghal@gmail.com',
+        pass: 'akrikkuthegreat',
+    }
+});
+
+app.post('/send',function(req,res){
+    email = 'akshatsinghal0313@gmail.com';
+    console.log(email);
+    
+    var mailOptions = {
+        to : email,
+        subject : 'OTP',
+        text : 'Your OTP is ' + otp
+        };
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+                console.log(error);
+                } else {
+                    console.log('Email sent: ' + info.response);
+                    res.render('otp.ejs');
+                    }
+                    });
+});
+
+app.post('/verify',function(req,res){
+    if(req.body.otp == otp){
+        res.send('succesfully verified');
+    }
+    else{
+        res.send('not verified');
+        }
+});
+
+
+
+server.listen( process.env.PORT || 5000)

@@ -7,7 +7,7 @@ function mealController() {
           .catch(err => console.log(err));
         },
         cartMeal(req, res) {
-// for the first time creating cart and adding basic object structure            
+            // for the first time creating cart and adding basic object structure            
             if (!req.session.cart){
                 req.session.cart = {
                     items: {},
