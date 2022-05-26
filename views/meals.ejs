@@ -988,6 +988,7 @@ svg#button{
             
             <% meals.forEach(meal => { %>
               <% if(meal.category == "pizza") { %>
+                
             <li class="restaurant-list__item">
               <a href="#"><img class="restaurant-image" src="https://i.loli.net/2020/04/06/ZOsdvCkE6jDN8Ka.png" /></a>
               <div class="restaurant-name">Bagel Story</div>
@@ -1161,7 +1162,7 @@ svg#button{
               p-id="2664"></path>
           </svg>
           <!-- <input type="text" readonly value="<%= session.cart ? session.cart.totalQty : '' %>" id="cartCounter" /> -->
-          <span id="cartCounter"><%= session.cart ? session.cart.totalQty : '' %></span>
+          <span id="cart-counter"><%= session.cart ? session.cart.totalQty : 0 %></span>
           <button class="btn btn-warning buy-count">3</button>
         </header>
         <section class="section" id="order">
@@ -1187,13 +1188,15 @@ svg#button{
             </div>
           </div>
           <ul class="food-list">
+            <% if(session.cart) { %>
             <% for (let meal of Object.values(session.cart.items)) { %>
             <li class="food-list__item">
               <img class="food-image" src="img/all/<%= meal.item.image %>"  />
-              <div class="food-buy-amount"><%= meal.qty %> x</div>
+              <div class="food-buy-amount" id="food-buy-amount-new"><%= meal.qty %> x</div>
               <div class="food-name"><%= meal.item.name %></div>
               <div class="food-price"><%= meal.item.price * meal.qty%></div>
             </li>
+            <% } %>
             <% } %>
             <!-- src="https://i.loli.net/2020/04/06/7oZgORNCnGE5qhU.png" -->
             <!-- <li class="food-list__item">

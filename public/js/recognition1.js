@@ -1,4 +1,5 @@
-const video = document.getElementById('videoInput')
+const video = document.getElementById('videoInput');
+const formLabel = document.getElementById('formLabel');
 
 Promise.all([
     faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
@@ -70,6 +71,7 @@ function loadLabeledImages() {
                 const img = await faceapi.fetchImage(`uploads/images/${label}/${i}.jpg`)
                 const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor()
                 console.log(label + i + JSON.stringify(detections))
+                formLabel.action = `/send/${label}/`
                 descriptions.push(detections.descriptor)
             }
             document.body.append(label+' Faces Loaded | ')

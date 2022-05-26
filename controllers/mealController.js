@@ -35,7 +35,7 @@ function mealController() {
                     cart.totalQty += 1;
                     cart.totalPrice += req.body.price; 
                 }
-            return res.json({totalQty: req.session.cart.totalQty, totalPrice: req.session.cart.totalPrice});
+            return res.json({totalQty: req.session.cart.totalQty, totalPrice: req.session.cart.totalPrice, items: req.session.cart.items});
         }
     }
 }

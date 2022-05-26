@@ -11,6 +11,7 @@ const server = require('http').Server(app);
 const flash = require('express-flash');
 const cors = require('cors');
 const User = require('./models/user');
+const Meal = require('./models/meal');
 const MongoDbStore = require('connect-mongo')
 var $           = require('jquery');  // for ajax
 
@@ -89,10 +90,10 @@ app.use((req, res, next) => {
     next();
 });
 
-require('./routes/web')(app);
+
 
 app.get('/register', (req, res) => {
-    res.render('registration1.ejs');
+    res.render('registration1.ejs'); 
 })
 
 
@@ -106,10 +107,14 @@ app.post('/meals', upload.single('image'), (req, res) => {
         image
     });
     newUser.save()
-        .then(item => res.render('meals.ejs', {meals:item}))
-        .catch(err => console.log(err));
+    Meal.find().sort({ createdAt: -1 })
+          .then(item => res.render('meals.ejs', {meals:item}))
+          .catch(err => console.log(err));
+        // .then(item => res.render('meals.ejs', {meals:item}))
+        // .catch(err => console.log(err));
 });
 
+require('./routes/web')(app);
 
 
 // const axios = require("axios");
@@ -170,8 +175,15 @@ let transporter = nodemailer.createTransport({
     }
 });
 
-app.post('/send',function(req,res){
-    email = 'akshatsinghal0313@gmail.com';
+app.post('/send/:name',function(req,res){
+    const name = req.params.name;
+    console.log(name);
+    User.find({name:name},function(err,user){
+        if(err) console.log(err);
+        console.log(user[0].email);
+    
+
+    email = user[0].email;
     console.log(email);
     
     var mailOptions = {
@@ -187,6 +199,7 @@ app.post('/send',function(req,res){
                     res.render('otp.ejs');
                     }
                     });
+                })              
 });
 
 app.post('/verify',function(req,res){

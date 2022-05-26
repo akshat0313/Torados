@@ -1,7 +1,7 @@
 function authController() {
     return {
         register(req, res) {
-            res.render('registration.ejs');
+            res.render('registration1.ejs');
         }
     }
 }

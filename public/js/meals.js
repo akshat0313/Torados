@@ -4,23 +4,38 @@ let displayMeal = document.getElementById('meal-to-display');
 let toDisplay = "all";
 let addToCart = document.querySelectorAll('.add-to-cart');
 let cartCounter = document.querySelector('#cart-counter');
+let foodInc = document.querySelector('.food-buy-amount');
+let foodName = document.querySelector('.food-name');
+let foorPrice = document.querySelector('.food-price');
+let foodBuyAmount = document.querySelector('#food-buy-amount-new'); 
+let foodImage = document.querySelector('.food-image');
 
 function updateCart(meal) {
+  let mealNew = meal;
 
-
+   foodName.innerText = meal.name;
+    foorPrice.innerText = '222';
+   
 
   $.ajax({
     url: '/meals',
     method: 'POST',
-    data: meal,
+    data: {...meal ,mealUpdated : mealNew} ,
     success: function(data) {
-      console.log(data.totalQty);
-      console.log(cartCounter);
-      updateCartNew();
-      // cartCounter.value++;
-      // cartCounter.innerHTML = data.totalQty;
+      const {items: {undefined: {item : {category, image, name, price }}}} = data;
+console.log(name)
+console.log(category)
+console.log(price)
+      console.log(data);
+      foodName.innerText = name;
+      foorPrice.innerText = price;
+      foodImage.src = "img/all/" + image;
+
+      cartCounter.innerText = data.totalQty;
+      foodInc.innerText = data.totalQty + "x";
     },
   });
+  console.log(data);
 }
 
 //   axios.post('/meals', meal)
@@ -35,7 +50,7 @@ function updateCart(meal) {
 addToCart.forEach((btn) => {
   btn.addEventListener('click', (e) => {
     
-
+    console.log(cartCounter);
     let meal = JSON.parse(btn.dataset.meal)
     updateCart(meal);
     console.log(meal)
@@ -61,8 +76,9 @@ function updateCartNew() {
 
 
 pizza.addEventListener('click', (e)=> {
-    toDisplay = "pizza";
+    toDisplay = "pizzas";
     console.log("clicked");
+
     displayMeal.innerHTML = `
     <div class="row">
     ${toDisplay}
