@@ -92,12 +92,23 @@ app.use((req, res, next) => {
 
 
 
+
 app.get('/register', (req, res) => {
     res.render('registration1.ejs'); 
 })
 
+require('./routes/web')(app);
 
-app.post('/meals', upload.single('image'), (req, res) => {
+app.use(function(req, res) {
+    res.status(404).render('error.ejs');
+})
+
+
+app.get('/animation', (req, res) => {
+    res.render('animation.ejs');
+})
+
+app.post('/animation', upload.single('image'), (req, res) => {
     console.log(req.file);
     const { name, email } = req.body;
     const image = req.file.path;
@@ -107,14 +118,32 @@ app.post('/meals', upload.single('image'), (req, res) => {
         image
     });
     newUser.save()
-    Meal.find().sort({ createdAt: -1 })
-          .then(item => res.render('meals.ejs', {meals:item}))
-          .catch(err => console.log(err));
+        .then(res.render('animation.ejs'))
+    // Meal.find().sort({ createdAt: -1 })
+    //       .then(item => res.render('meals.ejs', {meals:item}))
+    //       .catch(err => console.log(err));
         // .then(item => res.render('meals.ejs', {meals:item}))
         // .catch(err => console.log(err));
 });
 
-require('./routes/web')(app);
+// app.post('/meals', upload.single('image'), (req, res) => {
+//     console.log(req.file);
+//     const { name, email } = req.body;
+//     const image = req.file.path;
+//     const newUser = new User({
+//         name,
+//         email,
+//         image
+//     });
+//     newUser.save()
+//     Meal.find().sort({ createdAt: -1 })
+//           .then(item => res.render('meals.ejs', {meals:item}))
+//           .catch(err => console.log(err));
+//         // .then(item => res.render('meals.ejs', {meals:item}))
+//         // .catch(err => console.log(err));
+// });
+
+
 
 
 // const axios = require("axios");

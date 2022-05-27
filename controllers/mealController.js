@@ -21,8 +21,8 @@ function mealController() {
             console.log(req.body);
                 // check if item is already in cart
 
-                if(!cart.items[req.body.id]){
-                    cart.items[req.body.id] = {
+                if(!cart.items[req.body._id]){
+                    cart.items[req.body._id] = {
                         item: req.body,
                         qty: 1,
                         price: req.body.price
@@ -30,8 +30,8 @@ function mealController() {
                     cart.totalQty += 1;
                     cart.totalPrice += req.body.price;
                 } else {
-                    cart.items[req.body.id].qty += 1;
-                    cart.items[req.body.id].price += req.body.price;
+                    cart.items[req.body._id].qty += 1;
+                    cart.items[req.body._id].price += req.body.price;
                     cart.totalQty += 1;
                     cart.totalPrice += req.body.price; 
                 }

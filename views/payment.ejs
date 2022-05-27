@@ -24,8 +24,12 @@
   <form id="formLabel"  method="post">
     <button type="submit" value="iitianakshatsinghal@gmail.com">submit</button>
   </form>
-    <video id="videoInput" width="720" height="550" muted controls>
-      
+    <video id="videoInput" width="720" height="550" muted controls >
+      <div>
+    <% users.forEach(user => {  %>
+      <p id="registerUser" style="display:none;" ><%= user.name %></p>
+    <%  }) %>
+  </div>
 </body>
 <script defer  src="js/face-api.min.js"></script>
     <script defer  src="js/recognition1.js"></script>

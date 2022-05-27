@@ -1,0 +1,58 @@
+{
+    "meals":[
+        {
+            "_id": {
+                "$oid": "as1"
+            },
+            "category": "thai",
+            "name": "Guay Teo Thai",
+            "price": 270,
+            "image": "guayteothai.jpg"
+        },
+        {
+            "_id": {
+                "$oid": "as2"
+            },
+            "category": "thai",
+            "name": "Pad Thai",
+            "price": 380,
+            "image": "padthai.jpg"
+        },
+        {
+            "_id": {
+                "$oid": "as3"
+            },
+            "category": "thai",
+            "name": "Som Tam Thai",
+            "price": 400,
+            "image": "somtamthai.jpg"
+        },
+        {
+            "_id": {
+                "$oid": "as1"
+            },
+            "category": "sushi",
+            "name": "Chirasi Sushi",
+            "price": 400,
+            "image": "chirasisushi.jpg"
+        },
+        {
+            "_id": {
+                "$oid": "as2"
+            },
+            "category": "sushi",
+            "name": "Inari Sushi",
+            "price": 350,
+            "image": "inarisushi.jpg"
+        },
+        {
+            "_id": {
+                "$oid": "as3"
+            },
+            "category": "sushi",
+            "name": "Maki Sushi",
+            "price": 250,
+            "image": "makisushi.jpg"
+        }
+    ]
+}

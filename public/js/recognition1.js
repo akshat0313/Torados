@@ -1,5 +1,11 @@
 const video = document.getElementById('videoInput');
 const formLabel = document.getElementById('formLabel');
+const registerUser = document.querySelectorAll('#registerUser');
+var allUser = []
+registerUser.forEach(user => {
+    console.log(user.outerText)
+    allUser.push(user.outerText)
+})
 
 Promise.all([
     faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
@@ -52,6 +58,11 @@ async function recognizeFaces() {
                 const box = resizedDetections[i].detection.box
                 const drawBox = new faceapi.draw.DrawBox(box, { label: result.toString() })
                 drawBox.draw(canvas)
+                const wordArray = result.toString().split('(');
+                const word = wordArray[0].substring(0,wordArray[0].length-1);
+                console.log(word)
+                // console.log(result.toString().split('(').substring(0,result.toString().length-1))
+                formLabel.action = `/send/${word}/`
             })
         }, 100)
 
@@ -63,19 +74,21 @@ async function recognizeFaces() {
 
 function loadLabeledImages() {
     //const labels = ['Black Widow', 'Captain America', 'Hawkeye' , 'Jim Rhodes', 'Tony Stark', 'Thor', 'Captain Marvel']
-    const labels = ['Akshat Singhal'] // for WebCam
+    const labels = allUser // for WebCam
+    console.log(labels)
     return Promise.all(
         labels.map(async (label)=>{
             const descriptions = []
             for(let i=1; i<=1; i++) {
                 const img = await faceapi.fetchImage(`uploads/images/${label}/${i}.jpg`)
                 const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor()
-                console.log(label + i + JSON.stringify(detections))
-                formLabel.action = `/send/${label}/`
+                // console.log(label + i + JSON.stringify(detections))
+                // formLabel.action = `/send/${label}/`
                 descriptions.push(detections.descriptor)
             }
             document.body.append(label+' Faces Loaded | ')
             return new faceapi.LabeledFaceDescriptors(label, descriptions)
         })
     )
+
 }

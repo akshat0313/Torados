@@ -7,6 +7,7 @@ const verifyController = require("../controllers/verifyController");
 function initRoutes(app) {
   app.get("/", homeController().index);
   app.get("/register", authController().register);
+  app.get("/user", authController().user);
   app.get("/order", paymentController().order);
   app.get("/payment", paymentController().payment);
   app.get('/meals', mealController().meal);
