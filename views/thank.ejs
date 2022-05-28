@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,4 +24,29 @@
         </div>
     </div>
 </body>
+</html> -->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Autofocus Field</title>
+    <link rel="stylesheet" type="text/css" href="css/thankyoustyle.css" />
+  </head>
+  <body>
+    
+      <div class="container">
+        <h1 class="heading-text">Thank you<span style="color: #FF0000;">.</span></h1>
+        <p class="subheading-text">Your order has been placed.😎<br>Sit tight.</p>
+        <button>HOME PAGE</button>
+      </div>
+    
+    <script>
+        function clickEvent(first,last){
+			if(first.value.length){
+				document.getElementById(last).focus();
+			}
+		}
+    </script>
+  </body>
 </html>

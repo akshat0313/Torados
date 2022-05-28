@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <!-- Optional theme -->
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-<!-- Latest compiled and minified JavaScript -->
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <style>
       .height-100 {
@@ -145,7 +145,7 @@ input[type=number]::-webkit-outer-spin-button {
         <input type="text" name="otp" required>
         <button type="submit">submit</button>
     </form> -->
-    <script>
+    <!-- <script>
       document.addEventListener("DOMContentLoaded", function(event) {
 
 function OTPInput() {
@@ -153,4 +153,70 @@ const inputs = document.querySelectorAll('#otp > *[id]');
 for (let i = 0; i < inputs.length; i++) { inputs[i].addEventListener('keydown', function(event) { if (event.key==="Backspace" ) { inputs[i].value='' ; if (i !==0) inputs[i - 1].focus(); } else { if (i===inputs.length - 1 && inputs[i].value !=='' ) { return true; } else if (event.keyCode> 47 && event.keyCode < 58) { inputs[i].value=event.key; if (i !==inputs.length - 1) inputs[i + 1].focus(); event.preventDefault(); } else if (event.keyCode> 64 && event.keyCode < 91) { inputs[i].value=String.fromCharCode(event.keyCode); if (i !==inputs.length - 1) inputs[i + 1].focus(); event.preventDefault(); } } }); } } OTPInput(); });
     </script>
   </body>
+</html> --> -->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Autofocus Field</title>
+    <link rel="stylesheet" type="text/css" href="css/otpstyle.css" />
+  </head>
+  <body>
+    <div class="outer">
+      <div class="container">
+        <img class="mobile-img" src="img/mobile.png" alt="Email" />
+        <h1 class="heading-text">Verification</h1>
+        <p class="subheading-text">You will get an OTP via mail</p>
+        <div class="userInput">
+          <input
+            type="text"
+            id="ist"
+            maxlength="1"
+            name="otp"
+            onkeyup="clickEvent(this,'sec')"
+          />
+          <input
+            type="text"
+            id="sec"
+            maxlength="1"
+            name="otp"
+            onkeyup="clickEvent(this,'third')"
+          />
+          <input
+            type="text"
+            id="third"
+            maxlength="1"
+            name="otp"
+            onkeyup="clickEvent(this,'fourth')"
+          />
+          <input
+            type="text"
+            id="fourth"
+            maxlength="1"
+            name="otp"
+            onkeyup="clickEvent(this,'fifth')"
+          />
+          <input
+            type="text"
+            id="fifth"
+            maxlength="1"
+            name="otp"
+            onkeyup="clickEvent(this,'sixth')"
+          />
+          <input type="text" id="sixth" name="otp" maxlength="1" />
+        </div>
+        <button>SUBMIT</button>
+      </div>
+    </div>
+    <script>
+        function clickEvent(first,last){
+			if(first.value.length){
+				document.getElementById(last).focus();
+			}
+		}
+    console.log(req.body.otp);
+    </script>
+  </body>
 </html>
+

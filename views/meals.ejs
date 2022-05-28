@@ -242,7 +242,7 @@
           </ul>
           <div class="total-price">
             <div class="total">Total:</div>
-            <div class="price">$25.97</div>
+            <div class="price"><%= session.cart ? session.cart.totalPrice : 0  %></div>
           </div>
           <div class="buy-action">
             <div class="person-number-input">

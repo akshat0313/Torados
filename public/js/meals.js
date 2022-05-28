@@ -29,37 +29,9 @@ function updateCart(meal) {
     data: meal,
     success: function (data) {
       console.log(data);
-      const {
-        items: {
-          undefined: {
-            item: { category, image, name, price },
-          },
-        },
-      } = data;
-      location.reload();
-      // const {items: items} = data;
-      // const newItems =JSON.parse(items);
-      // console.log(newItems);
-      // Items.Map(item => {
-      // // const {items: {undefined: {item : {category, image, name, price }}}} = data;
-      // // const { item: {category, image, name, price }} = item;
-      // console.log(name)
-      // console.log(category)
-      // console.log(price)
-
-      // foodName.innerText = name;
-      // foorPrice.innerText = price;
-      // foodImage.src = "img/all/" + image;
-      // });
-      foodName.innerText = name;
-      foorPrice.innerText = price;
-      foodImage.src = "img/all/" + image;
-      console.log(items);
-      console.log(data);
-      cartCounter.innerText = data.totalQty;
-      foodInc.innerText = data.totalQty + "x";
     },
   });
+  console.log("cart updated");
 }
 
 addToCart.forEach((btn) => {
@@ -67,6 +39,7 @@ addToCart.forEach((btn) => {
     let meal = JSON.parse(btn.dataset.meal);
     console.log(meal);
     updateCart(meal);
+    window.location = "/animation";
   });
 });
 

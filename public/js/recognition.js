@@ -1,61 +1,84 @@
-
-
-const imageUpload = document.getElementById('imageUpload')
+const video = document.getElementById("videoInput");
+const formLabel = document.getElementById("formLabel");
+const registerUser = document.querySelectorAll("#registerUser");
+var allUser = [];
+registerUser.forEach((user) => {
+  console.log(user.outerText);
+  allUser.push(user.outerText);
+});
 
 Promise.all([
-  faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
-  faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
-  faceapi.nets.ssdMobilenetv1.loadFromUri('/models')
-]).then(start)
+  faceapi.nets.faceRecognitionNet.loadFromUri("/models"),
+  faceapi.nets.faceLandmark68Net.loadFromUri("/models"),
+  faceapi.nets.ssdMobilenetv1.loadFromUri("/models"), //heavier/accurate version of tiny face detector
+]).then(start);
 
-async function start() {
-  const container = document.createElement('div')
-  container.style.position = 'relative'
-  document.body.append(container)
-  const labeledFaceDescriptors = await loadLabeledImages()
-  console.log(labeledFaceDescriptors);
-  const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6)
-  let image
-  let canvas
-  document.body.append('Loaded')
-  imageUpload.addEventListener('change', async () => {
-    if (image) image.remove()
-    if (canvas) canvas.remove()
-    image = await faceapi.bufferToImage(imageUpload.files[0])
-    container.append(image)
-    canvas = faceapi.createCanvasFromMedia(image)
-    container.append(canvas)
-    const displaySize = { width: image.width, height: image.height }
-    faceapi.matchDimensions(canvas, displaySize)
-    const detections = await faceapi.detectAllFaces(image).withFaceLandmarks().withFaceDescriptors()
-    const resizedDetections = faceapi.resizeResults(detections, displaySize)
-    const results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor))
-    results.forEach((result, i) => {
-      const box = resizedDetections[i].detection.box
-      const drawBox = new faceapi.draw.DrawBox(box, { label: result.toString() })
-      drawBox.draw(canvas)
-    })
-    
-   
-  })
+function start() {
+  navigator.getUserMedia(
+    { video: {} },
+    (stream) => (video.srcObject = stream),
+    (err) => console.error(err)
+  );
+  console.log("video added");
+  recognizeFaces();
+}
+
+async function recognizeFaces() {
+  const labeledDescriptors = await loadLabeledImages();
+  console.log(labeledDescriptors);
+  const faceMatcher = new faceapi.FaceMatcher(labeledDescriptors, 0.7);
+
+  video.addEventListener("play", async () => {
+    console.log("Playing");
+    const canvas = faceapi.createCanvasFromMedia(video);
+    document.body.append(canvas);
+
+    const displaySize = { width: video.width, height: video.height };
+    faceapi.matchDimensions(canvas, displaySize);
+
+    setInterval(async () => {
+      const detections = await faceapi
+        .detectAllFaces(video)
+        .withFaceLandmarks()
+        .withFaceDescriptors();
+
+      const resizedDetections = faceapi.resizeResults(detections, displaySize);
+      canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+
+      const results = resizedDetections.map((d) => {
+        return faceMatcher.findBestMatch(d.descriptor);
+      });
+      results.forEach((result, i) => {
+        const box = resizedDetections[i].detection.box;
+        const drawBox = new faceapi.draw.DrawBox(box, { label: result.toString() });
+        drawBox.draw(canvas);
+        const wordArray = result.toString().split("(");
+        const word = wordArray[0].substring(0, wordArray[0].length - 1);
+        console.log(word);
+        formLabel.action = `/send/${word}/`;
+      });
+    }, 100);
+  });
 }
 
 function loadLabeledImages() {
-  const labels = ['Akshat Singhal']
+  const labels = allUser; // for WebCam
+  console.log(labels);
   return Promise.all(
-    labels.map(async label => {
-      const descriptions = []
+    labels.map(async (label) => {
+      const descriptions = [];
       for (let i = 1; i <= 1; i++) {
-        const img = await faceapi.fetchImage(`uploads/images/${label}/${i}.jpg`)
-        const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor()
-        descriptions.push(detections.descriptor)
-       
+        const img = await faceapi.fetchImage(
+          `uploads/images/${label}/${i}.jpg`
+        );
+        const detections = await faceapi
+          .detectSingleFace(img)
+          .withFaceLandmarks()
+          .withFaceDescriptor();
+        descriptions.push(detections.descriptor);
       }
-
-      return new faceapi.LabeledFaceDescriptors(label, descriptions)
+      document.body.append(label + " Faces Loaded | ");
+      return new faceapi.LabeledFaceDescriptors(label, descriptions);
     })
-  )
- 
+  );
 }
-
-// https://raw.githubusercontent.com/WebDevSimplified/Face-Recognition-JavaScript/master/labeled_images/${label}/${i}.jpg

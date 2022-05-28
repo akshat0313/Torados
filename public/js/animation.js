@@ -1,4 +1,4 @@
 setTimeout(function () {
-    // after 2 seconds
+    // after 1.5 seconds
     window.location = "/meals";
-  }, 2000);
+  }, 1500);

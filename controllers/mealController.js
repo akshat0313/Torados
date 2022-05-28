@@ -17,25 +17,26 @@ function mealController() {
             }
 
             let cart = req.session.cart;
-
-            console.log(req.body);
+            req.body.price = parseInt(req.body.price)
+            parseInt(cart.totalPrice)
+            console.log(req.body.price);
                 // check if item is already in cart
 
                 if(!cart.items[req.body._id]){
                     cart.items[req.body._id] = {
                         item: req.body,
                         qty: 1,
-                        price: req.body.price
+                        price: parseInt(req.body.price)
                     }
                     cart.totalQty += 1;
-                    cart.totalPrice += req.body.price;
+                    cart.totalPrice = parseInt(cart.totalPrice) + parseInt(req.body.price);
                 } else {
                     cart.items[req.body._id].qty += 1;
                     cart.items[req.body._id].price += req.body.price;
                     cart.totalQty += 1;
-                    cart.totalPrice += req.body.price; 
+                    cart.totalPrice = parseInt(cart.totalPrice) + parseInt(req.body.price); 
                 }
-            return res.json({totalQty: req.session.cart.totalQty, totalPrice: req.session.cart.totalPrice, items: req.session.cart.items});
+            return res.json({totalQty: req.session.cart.totalQty, totalPrice: parseInt(req.session.cart.totalPrice), items: req.session.cart.items});
         }
     }
 }
