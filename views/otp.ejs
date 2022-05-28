@@ -5,138 +5,113 @@
     <title>Autofocus Field</title>
     <style>
       body {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-}
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+      }
 
-.outer {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff;
-}
+      .outer {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+      }
 
-.container {
-  background: #ffd2d2;
+      .container {
+        background: #ffd2d2;
 
-  display: flex;
-  flex-flow: column;
-  height: 80%;
-  width: 80%;
-  align-items: space-around;
-  justify-content: center;
-}
+        display: flex;
+        flex-flow: column;
+        height: 80%;
+        width: 80%;
+        align-items: space-around;
+        justify-content: center;
+      }
 
-.mobile-img {
-  width: 7%;
-  height: 10%;
-  margin: auto;
-  margin-bottom: 0;
-  margin-top: 0;
-}
+      .mobile-img {
+        width: 7%;
+        height: 10%;
+        margin: auto;
+        margin-bottom: 0;
+        margin-top: 0;
+      }
 
-.heading-text {
-  font-size: 2.5em;
-  font-weight: bold;
-  color: #000;
-  text-align: center;
-}
+      .heading-text {
+        font-size: 2.5em;
+        font-weight: bold;
+        color: #000;
+        text-align: center;
+      }
 
-.subheading-text {
-  color: #8e8e8e;
-  text-align: center;
-}
+      .subheading-text {
+        color: #8e8e8e;
+        text-align: center;
+      }
 
-.userInput {
-	margin-top: 5rem;
-  display: flex;
-  justify-content: center;
-}
+      input {
+        margin: 10px;
+        height: 35px;
+        width: 35px;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        font-family: arimo;
+        font-size: 1.2rem;
+        border: #000;
+        border-radius: 10%;
+      }
 
-input {
-  margin: 10px;
-  height: 35px;
-  width: 35px;
-  border: none;
-  border-radius: 5px;
-  text-align: center;
-  font-family: arimo;
-  font-size: 1.2rem;
-	border: #000;
-	border-radius: 10%;
-}
-
-
-
-button {
-  width: 300px;
-  height: 40px;
-  margin: 25px auto 0px auto;
-  font-family: arimo;
-  font-size: 0.9rem;
-  border: none;
-  border-radius: 5px;
-  letter-spacing: 1px;
-  cursor: pointer;
-  color: #FFF;
-  font-weight: 900;
-  background: #FF0000
-}
+      button {
+        width: 300px;
+        height: 40px;
+        margin: 25px auto 0px auto;
+        font-family: arimo;
+        font-size: 0.9rem;
+        border: none;
+        border-radius: 5px;
+        letter-spacing: 1px;
+        cursor: pointer;
+        color: #fff;
+        font-weight: 900;
+        background: #ff0000;
+      }
     </style>
   </head>
   <body>
     <div class="outer">
       <div class="container">
-        <img class="mobile-img" src="img/mobile.png" alt="Email" />
+        <svg class="mobile-img" width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <rect width="100" height="100" fill="url(#pattern0)"/>
+          <defs>
+          <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+          <use xlink:href="#image0_12_136" transform="scale(0.01)"/>
+          </pattern>
+          <image id="image0_12_136" width="100" height="100" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABmJLR0QA/wD/AP+gvaeTAAAEiElEQVR4nO2dX4hVRRzHP6vuaiCFtmb+CyJEKEIRkjB6CYTMngwqEgwEQV19UujFBx999dEXfQl8ECRCiyBEoq3FP/kSoYQaahGRirtqabq3hzkX95797dlz750zv9/Z+/vA72XOzPx+Z747O2fOzJ0DjuM4juM4Tr0ZAHYDI8A9oGHc7gE/AkNZ7DOKpcBP6Ddyp3YBWBK9VZQYoN5iNO080B+5bVTYjX5jxrKdkdtGhRFab+oksEw1onIsB07RGvsPqhFFYozWm1quG05brKA19tGqHfZV7YBwI6l9xiRp/LOqrNxpHxfEGC6IMeYo+Mz/T3Ym4D3EGC6IMVwQY2iMIXWfh1SK9xBjuCDGcEGM4YIYwwUxhgtiDBfEGBrzkLqRdN7kPcQYLogxXBBj1HkMqfu6ijg2eQ8xhgtiDBekB8lvx6yq3pvAmoj1x+I14Deqa4e2SSVIc2fhuxF9dMs7wB3kWNVIKUgD+A/YHtFPp2wFHjJ1nGqkFqQBjAMH0Fsu/iyLoShGNVIJ8kRIO0La33T0A0dLxqZGKkE2Aw+E9G+B5yL6nYr5wFeC/3+Bj4V0NVIJAvAm8Jdw7WfgpYi+8ywFLgp+bwFvF8SrQkpBAF4BLgnX/wDWRvTf5HXguuDvCrCqRLzJSS0IwELgOyHPGLApYgwbgLuCnxHghTbiTYqGIABzgWNCvsfE+a3gNuCRUP8J4JkO4k2GliAQHnsPCHkbwCE6e3XUaZ0uyAS2EyaM+TLHgXlt+BwAPhfqeQzsiRhvpVgQBMJjsTRZOwMsKFF+QZY3X348qzt2vJVhQZDngW+EMk37FVhZUP5l4JeC8meYPIh3E2+laAuyBrgq5M/b38B6ofwbwJ8lyl8H1kWIt3I0BfkU+EfIewMYFtIfAHuBxZntQ579DxNe90vlt3YRbxI0BJkDHBTyNAjzkxeZeoCezpoPAoOE1zJSnsNMPkGoZwVZBJwWrjcbauLLxqJHWMnyj7VFwn9P6wlCPSnIW4RXJPlr94FPCur6iKkXkhrAbeDDgvJbMh/5cr/zdFzqOUGGkBeErgCrS9Q3COwHzhEa9z5wNksbLFF+deYr7/8hsEtIVyOVIJJ9TXivlYpngS9KxqaGhiDjhP/tsyP6K0sfYcVQWpTqSUFGgQ8i+umU9ykel9RIKchl4NWIPrplJWFxrCcF+ZI0S7XtMp8wdynVDnU+wCxf7ywhzQp9hHEtnzaJOu9+z5O/4Vrie3uN4YIYwwUxRp3HkLqdKlQK7yHGcEGM4YIYo85jSCqqmtiKeA8xhgtiDBfEGC6IMVwQY7ggxnBBjOFfRzCG9xBjuCDGcEGM4V9HmJ6kY573EGPUSZD3gGuU2zc70a4BGxXiNUusjXLSaQll7WYXfpPuOKxTD3EiEesvbCPlfryZt6t0d8qcmT25sRil9Yb848TK5D/ffYp6iLKCyedfzYjPdw/R+WBszXZEbhsVBoAL6Ddmt3aWtMcFVsoS4Dz6jdqpnaP1J84zgn7COVXDhIPEtBt5OhvLYt3BDOoZjuM4juM4vcn/znJPVzX/p9MAAAAASUVORK5CYII="/>
+          </defs>
+          </svg>
         <h1 class="heading-text">Verification</h1>
         <p class="subheading-text">You will get an OTP via mail</p>
-        <div class="userInput">
+        <form
+          method="post"
+          style="display: flex; justify-content: center; flex-direction: column"
+        >
           <input
             type="text"
-            id="ist"
-            maxlength="1"
-            onkeyup="clickEvent(this,'sec')"
+            name="otp"
+            style="width: 300px; height: 40px; margin: 25px auto 0px auto"
           />
-          <input
-            type="text"
-            id="sec"
-            maxlength="1"
-            onkeyup="clickEvent(this,'third')"
-          />
-          <input
-            type="text"
-            id="third"
-            maxlength="1"
-            onkeyup="clickEvent(this,'fourth')"
-          />
-          <input
-            type="text"
-            id="fourth"
-            maxlength="1"
-            onkeyup="clickEvent(this,'fifth')"
-          />
-          <input
-            type="text"
-            id="fifth"
-            maxlength="1"
-            onkeyup="clickEvent(this,'sixth')"
-          />
-          <input type="text" id="sixth" maxlength="1" />
-        </div>
-        <input type="text" name="otp">
-        <button type="submit">SUBMIT</button>
+          <button type="submit">SUBMIT</button>
+        </form>
       </div>
     </div>
     <script>
-        function clickEvent(first,last){
-			if(first.value.length){
-				document.getElementById(last).focus();
-			}
-		}
+      function clickEvent(first, last) {
+        if (first.value.length) {
+          document.getElementById(last).focus();
+        }
+      }
     </script>
   </body>
 </html>
-
