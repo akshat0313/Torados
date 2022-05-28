@@ -61,7 +61,6 @@ async function recognizeFaces() {
                 const wordArray = result.toString().split('(');
                 const word = wordArray[0].substring(0,wordArray[0].length-1);
                 console.log(word)
-                // console.log(result.toString().split('(').substring(0,result.toString().length-1))
                 formLabel.action = `/send/${word}/`
             })
         }, 100)
@@ -83,7 +82,6 @@ function loadLabeledImages() {
                 const img = await faceapi.fetchImage(`uploads/images/${label}/${i}.jpg`)
                 const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor()
                 // console.log(label + i + JSON.stringify(detections))
-                // formLabel.action = `/send/${label}/`
                 descriptions.push(detections.descriptor)
             }
             document.body.append(label+' Faces Loaded | ')

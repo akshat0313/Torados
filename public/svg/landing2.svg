@@ -1,50 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Landing</title>
-    <link rel="stylesheet" href="css/landing.css" />
-  </head>
-  <body>
-    <div class="page">
-      <div>
-        <h1 style="margin-top: 5rem; margin-left: 1.5rem">Welcome to</h1>
-        <div style="display: flex">
-          <h1 style="font-weight: 900; font-size: 54px; margin-left: 3rem">
-            Torados
-          </h1>
-          <p
-            style="
-              color: red;
-              font-weight: 900;
-              font-size: 35px;
-              border-radius: 100%;
-              margin-top: 3.3rem;
-            "
-          >
-            .
-          </p>
-        </div>
-
-        <div style="display: flex; flex-direction: row">
-          <a href="/register"
-            ><button class="btn-6"><span>REGISTER</span></button></a
-          >
-          <a href="/meals"
-            ><button class="btn-6"><span>ORDER MEAL</span></button></a
-          >
-        </div>
-      </div>
-      <div class="image-display">
-        <img style="height: 40rem; width: 45rem" src="img/landing.png" alt="" />
-      </div>
-    </div>
-    <div id="splash">
-      <div class="anim">
-        <div id="loader">
-          <svg version="1.1" width="60px" height="70px" viewBox="0 0 60 70">
+<svg version="1.1" width="60px" height="70px" viewBox="0 0 60 70">
             <defs>
               <filter id="f1" x="0" y="0">
                 <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
@@ -77,8 +31,3 @@
               />
             </g>
           </svg>
-        </div>
-      </div>
-    </div>
-  </body>
-</html>
