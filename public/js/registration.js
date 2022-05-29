@@ -1,3 +1,4 @@
+// jquery for the animation in the registration page
 $(document).ready(function () {
   console.log("ready!");
   $(".input").on("focus", function () {

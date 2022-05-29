@@ -1,13 +1,15 @@
+// Getting all the required modules
 require("dotenv").config();
 const nodemailer = require("nodemailer");
 const User = require('../models/user');
 var email;
 
+// generating the OTP
 var otp = Math.random();
 otp = otp * 1000000;
 otp = parseInt(otp);
-console.log(otp);
 
+// using nodemailer to send the OTP to the user's email
 let transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
@@ -20,6 +22,7 @@ let transporter = nodemailer.createTransport({
 
 function otpController() {
   return {
+    // for sending the OTP to the recognised user's email
     send(req, res) {
       const name = req.params.name;
       console.log(name);
@@ -45,15 +48,18 @@ function otpController() {
         });
       });
     },
-
+    // for verifying the OTP
     verify(req, res) {
       if (req.body.otp == otp) {
+        // if the OTP is correct, redirect to the thank.ejs page
         res.render("thank.ejs");
       } else {
+        // if the OTP is incorrect, redirect to the error.ejs page
         res.render("error.ejs");
       }
     },
   };
 }
 
+// exporting the otpController
 module.exports = otpController;

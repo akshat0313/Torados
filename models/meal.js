@@ -1,6 +1,8 @@
+// Getting all the required modules
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// Creating a schema for the meal model
 const mealSchema = new Schema({
     name: {
         type: String,
@@ -25,5 +27,7 @@ const mealSchema = new Schema({
 
 }, { timestamps: true });
 
+// Create the model class
 const Meal = mongoose.model('Meal', mealSchema);
+// export the model
 module.exports = Meal;

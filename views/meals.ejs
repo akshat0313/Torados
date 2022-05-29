@@ -39,6 +39,7 @@
               </svg>
             </button>
           </div>
+          <!-- All categories of meals section -->
           <div class="categories">
             <ul class="category-list">
               <li class="category-list__item" id="pizza">
@@ -100,6 +101,7 @@
             </ul>
           </div>
         </section>
+        <!-- Section for showing all the meals -->
         <section class="section">
           <ul class="restaurant-list" id="sushi-click" style="display:none ;">     
             <% meals.forEach(meal => { %>
@@ -225,6 +227,7 @@
           </div>
           <ul class="food-list">
             <% if(session.cart) { %>
+            <!-- for getting all the added meals to cart by the user -->
             <% for (let meal of Object.values(session.cart.items)) { %>
             <li class="food-list__item">
               <img class="food-image" src="img/<%= meal.item.category %>/<%= meal.item.image %>"  />
@@ -242,6 +245,7 @@
           </ul>
           <div class="total-price">
             <div class="total">Total:</div>
+            <!-- Total price of selected meals by the user -->
             <div class="price"><%= session.cart ? session.cart.totalPrice : 0  %></div>
           </div>
           <div class="buy-action">

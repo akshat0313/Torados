@@ -14,6 +14,7 @@
   </div>
   <div>
     <% users.forEach(user=> { %>
+       <!-- Hidden html element for storing the registered users which will be used in the recognition process -->
       <p id="registerUser" style="display:none;"><%= user.name %></p>
       <% }) %>
   </div>
@@ -21,6 +22,8 @@
     <button class="btn-6" type="submit">submit</button>
   </form>
 </body>
+ <!-- face-api.js api script -->
 <script defer src="js/face-api.min.js"></script>
+ <!-- recognition.js script for the face recognition process -->
 <script defer src="js/recognition.js"></script>
 </html>

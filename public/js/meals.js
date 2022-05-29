@@ -22,7 +22,9 @@ let thaiID = document.getElementById("thai");
 let sushiID = document.getElementById("sushi");
 let checkout = document.getElementById("checkout");
 
+// for post request to add the meal to the cart
 function updateCart(meal) {
+  // ajax call to add the meal to the cart
   $.ajax({
     url: "/meals",
     method: "POST",
@@ -34,15 +36,17 @@ function updateCart(meal) {
   console.log("cart updated");
 }
 
+// click event for all the add to cart buttons
 addToCart.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     let meal = JSON.parse(btn.dataset.meal);
-    console.log(meal);
     updateCart(meal);
+    // load the page to display the meal added to the cart
     window.location = "/animation";
   });
 });
 
+// Click events for all the categories to display the meals
 pizzaID.addEventListener("click", (e) => {
   [sushi, thai, asian, burger, barbeque, dessert].forEach((btn) => {
     btn.style.display = "none";
@@ -92,6 +96,7 @@ barbequeID.addEventListener("click", (e) => {
   barbeque.style.display = "grid";
 });
 
+// click event for the checkout button to send the user to the payment page
 checkout.addEventListener("click", (e) => {
   window.location.href = "/payment";
 });
