@@ -51,6 +51,7 @@ function otpController() {
     // for verifying the OTP
     verify(req, res) {
       if (req.body.otp == otp) {
+        console.log("OTP verified");
         // if the OTP is correct, redirect to the thank.ejs page
         res.render("thank.ejs");
       } else {
