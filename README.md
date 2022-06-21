@@ -23,7 +23,7 @@
 </p>
 
 # IMPORTANT -
-### Currently the mail sendind feature is not working because google has stopped providing that less security feature in gmail accounts from 30th may.
+### Currently the mail sending feature is not working because google has stopped providing that less security feature in gmail accounts from 30th may.
 
 ## 📝 Table of Contents
 
